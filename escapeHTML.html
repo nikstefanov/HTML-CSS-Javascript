@@ -1,0 +1,39 @@
+<HTML>
+<HEAD>
+<TITLE>Test</TITLE>
+<SCRIPT LANGUAGE=javascript>
+
+</SCRIPT>
+
+
+</HEAD>
+<BODY>
+<input type="hidden" id="hid">
+<textarea id="ta"></textarea>
+<div id="id1"></div>
+<div id="id2"></div>
+
+<script>
+	document.getElementById("id1").innerHTML="Script is workin&lt;";
+	//document.getElementById("id2").innerHTML="&#39;";
+	document.getElementById("ta").innerHTML="&apos;";
+	var content = document.getElementById("ta").value;
+	
+	
+	document.getElementById("id2").innerHTML="Result: "+content;
+	/*
+	document.getElementById("id1").innerHTML="Script is workin'";
+	document.getElementById("id1").innerHTML="Ala<br/>Bala";
+	var content = document.getElementById("id1").innerHTML;
+	//document.getElementById("hid").innerHTML="Mian&Mian";
+	//content = document.getElementById("hid").text;
+	var para=document.createElement("p");
+	para.innerHTML="Andy&#77;Bandy";
+	//var node=document.createTextNode("This is&lt; new.");
+	//para.appendChild(node);
+	content = para.innerHTML;
+	document.getElementById("id2").innerHTML="Result: "+content;
+	*/
+</script>
+</BODY>
+</HTML>

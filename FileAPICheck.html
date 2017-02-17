@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+function displayDate()
+{
+document.getElementById("demo").innerHTML=Date();
+}
+function fileAPICheck(){
+	if (window.File && window.FileReader && window.FileList && window.Blob) {
+	  // Great success! All the File APIs are supported.
+	  alert('The File APIs are FULLY supported in this browser.');
+	} else {
+	  alert('The File APIs are NOT FULLY supported in this browser.');
+	}
+}
+function makefile(){
+   var fso;
+   var thefile;
+   fso = new ActiveXObject("Scripting.FileSystemObject");
+   thefile=fso.CreateTextFile("D:\\MyFile.txt",true);
+   thefile.close()
+} 
+function save_content_to_file() {
+	var content="Something!"
+	var filename="MyFile";
+    var dlg = false;
+    with(document){
+		 ir=createElement('iframe');
+		 ir.id='ifr';
+		 ir.location='about.blank';
+		 ir.style.display='none';
+		 body.appendChild(ir);
+		 with(getElementById('ifr').contentWindow.document){
+			 open("text/plain", "replace");
+			 charset = "utf-8";
+			 write(content);
+			 close();
+			 document.charset = "utf-8";
+			 dlg = execCommand('SaveAs', false, filename+'.txt');
+		 }
+		 body.removeChild(ir);
+	 }
+     return dlg;
+}
+function save_open () {
+     //document.write("&#209");
+	 var content="Something New!!!!"
+     var dlg = false;
+     with(document){
+		 ir=createElement('iframe');
+		 ir.id='ifr';
+		 ir.location='about.blank';
+		 ir.style.display='none';
+		 body.appendChild(ir);
+		 with(getElementById('ifr').contentWindow.document){
+			 open("text/plain", "replace");
+			 charset = "utf-8";
+			 write(content);
+			 close();
+			 document.charset = "utf-8";
+			 dlg = execCommand('SaveAs', false, 'MyFile2.txt');
+		 }
+		 body.removeChild(ir);
+	 }
+     return dlg;
+} 
+function blob_test(){
+	var bb = new BlobBuilder();
+	bb.append("Ala Bala");
+	//window.saveAs(bb.getBlob(), "D:\\test_file.txt");
+	var fileSaver = new FileSaver(bb.getBlob())
+}
+function blob2(){
+	var bb = new BlobBuilder();
+  var output = Builder.output({"binary":true});
+
+  var ui8a = new Uint8Array(output.length);
+
+  for(var i = 0; i< output.length; i++) {
+      ui8a[i] = output.charCodeAt(i);
+  }
+
+  bb.append(ui8a.buffer);
+
+  var blob = bb.getBlob("application/octet-stream");
+  var saveas = document.createElement("iframe");
+  saveas.style.display = "none";
+
+  if(!!window.createObjectURL == false) {
+    saveas.src = window.webkitURL.createObjectURL(blob);
+  }
+  else {
+    saveas.src = window.createObjectURL(blob);
+  } 
+}
+</script>
+</head>
+<body>
+
+<h1>My First Web Page</h1>
+<p id="demo">This is a paragraph.</p>
+
+<button type="button" onclick="displayDate()">Display Date</button>
+<button type="button" onclick="fileAPICheck()">Check File API</button>
+<button type="button" onclick="makefile()   ">Create File</button>
+<button type="button" onclick="save_content_to_file()">Save File</button>
+<button type="button" onclick="save_open()">Save Open</button>
+<button onclick="javascript:document.execCommand('SaveAs','1','fileName.txt')">Click to save</Button> 
+<br/>
+<button type="button" onclick="blob_test()">Blob Test</button>
+<button type="button" onclick="blob2()">Blob Test2</button>
+</body>
+</html> 
+

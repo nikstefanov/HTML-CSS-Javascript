@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="FileSaver.js"/>
+<script type="text/javascript">
+function saveText(){
+	var bb = new BlobBuilder;
+	bb.append("Hello, world!");
+	saveAs(bb.getBlob("text/plain;charset=utf-8"), "hello_world.txt");
+}
+</script>
+</head>
+<body>
+<button type="button" onclick="saveText()">SaveText</button>
+</body>
+</html>

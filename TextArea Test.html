@@ -1,0 +1,33 @@
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<TITLE>TextArea Test</TITLE>
+<SCRIPT LANGUAGE=javascript>
+<!--
+function setStyle(){
+var objForm = document.forms[0]
+if(objForm.elements['field1'].checked){
+objForm.elements['textarea1'].style.color = "red";
+}else{
+objForm.elements['textarea1'].style.color = "black";
+}
+}
+
+function setDisabled(objControl){
+var objForm = document.forms[0]
+if(objForm.elements['field1'].checked){
+objForm.elements['field1'].focus();
+}
+}
+//-->
+</SCRIPT>
+
+
+</HEAD>
+<BODY>
+<FORM action="" method=post id=form1 name=form1>
+<TEXTAREA rows=10 cols=10 name="textarea1" id=textarea1 style="" onFocus = setDisabled(this)>This is the sample text.</TEXTAREA>
+<INPUT TYPE=checkbox name=field1 onClick = setStyle()> Disable textarea.
+</FORM>
+</BODY>
+</HTML>

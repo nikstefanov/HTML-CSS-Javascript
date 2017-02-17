@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="Io.js"/>
+<script type="text/javascript">
+function saveText(){
+	var fileOut = FileIO.open('D:/test.txt');
+	var str = FileIO.read(fileIn);
+	var rv = FileIO.write(fileOut, str);
+	alert('File write: ' + rv);
+	 	rv = FileIO.write(fileOut, str, 'a');
+	 	alert('File append: ' + rv);
+	 	rv = FileIO.unlink(fileOut);
+	 	alert('File unlink: ' + rv);
+}
+</script>
+</head>
+<body>
+<button type="button" onclick="saveText()">SaveText</button>
+</body>
+</html>

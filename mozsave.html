@@ -1,0 +1,69 @@
+<html>
+<head>
+<script language="javascript">
+var savefile = "d:\mozdata.txt";
+
+function save() {
+	try {
+		netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+	} catch (e) {
+		alert("Permission to save file was denied.");
+	}
+	var file = Components.classes["@mozilla.org/file/local;1"]
+		.createInstance(Components.interfaces.nsILocalFile);
+	file.initWithPath( savefile );
+	if ( file.exists() == false ) {
+		alert( "Creating file... " );
+		file.create( Components.interfaces.nsIFile.NORMAL_FILE_TYPE, 420 );
+	}
+	var outputStream = Components.classes["@mozilla.org/network/file-output-stream;1"]
+		.createInstance( Components.interfaces.nsIFileOutputStream );
+
+	outputStream.init( file, 0x04 | 0x08 | 0x20, 420, 0 );
+	var output = document.getElementById('FileData').value;
+	var result = outputStream.write( output, output.length );
+	outputStream.close();
+
+}
+function read() {
+	try {
+		netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+	} catch (e) {
+		alert("Permission to read file was denied.");
+	}
+	var file = Components.classes["@mozilla.org/file/local;1"]
+		.createInstance(Components.interfaces.nsILocalFile);
+	file.initWithPath( savefile );
+	if ( file.exists() == false ) {
+		alert("File does not exist");
+	}
+	var is = Components.classes["@mozilla.org/network/file-input-stream;1"]
+		.createInstance( Components.interfaces.nsIFileInputStream );
+	is.init( file,0x01, 00004, null);
+	var sis = Components.classes["@mozilla.org/scriptableinputstream;1"]
+		.createInstance( Components.interfaces.nsIScriptableInputStream );
+	sis.init( is );
+	var output = sis.read( sis.available() );
+	document.getElementById('FileData').value = output;
+}
+</script>
+</head>
+
+<body>
+<b>File Name:</b>
+<br>
+<input id="filename" type="text">
+<br>
+<br>
+<b>Data:</b><br>
+<textarea id="FileData" height="50" width="50"></textarea>
+<br>
+<br>
+<input type="button" value="Save" OnClick="save()">
+<input type="button" value="Load" OnClick="read()">
+<br>
+<br>
+<input type="reset" value="Reset">
+
+</body>
+</html>

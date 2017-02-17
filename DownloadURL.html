@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+function downloadURL()
+{
+    var iframe;
+    iframe = document.getElementById("hiddenDownloader");
+    if (iframe === null)
+    {
+        iframe = document.createElement('iframe');  
+        iframe.id = "hiddenDownloader";
+        iframe.style.visibility = 'hidden';
+        document.body.appendChild(iframe);
+    }
+    //iframe.src = "http://debian.fmi.uni-sofia.bg/~nikstefanov/LDLINUX.SYS";   
+	iframe.src = "data:application/octet-stream;charset=utf-8,shdkfjhsdjkfhkjashdgfjk";   
+}
+</script>
+</head>
+<body>
+<button type="button" onclick="downloadURL()">Download URL</button>
+</body>
+</html>
